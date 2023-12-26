@@ -5,7 +5,6 @@ import email.utils
 import enum
 import itertools
 import json
-import random
 import logging
 import re
 import snscrape.base
@@ -13,6 +12,7 @@ import string
 import time
 import typing
 import urllib.parse
+import secrets
 
 
 logger = logging.getLogger(__name__)
@@ -174,7 +174,7 @@ class TwitterAPIScraper(snscrape.base.Scraper):
 		super().__init__(**kwargs)
 		self._baseUrl = baseUrl
 		self._guestToken = None
-		self._userAgent = f'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.{random.randint(0, 9999)} Safari/537.{random.randint(0, 99)}'
+		self._userAgent = f'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.{secrets.SystemRandom().randint(0, 9999)} Safari/537.{secrets.SystemRandom().randint(0, 99)}'
 		self._apiHeaders = {
 			'User-Agent': self._userAgent,
 			'Authorization': _API_AUTHORIZATION_HEADER,

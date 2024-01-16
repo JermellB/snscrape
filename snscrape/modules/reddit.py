@@ -114,11 +114,9 @@ class RedditPushshiftScraper(snscrape.base.Scraper):
 		cls = Submission if 'title' in d else Comment
 
 		# Pushshift doesn't always return a permalink; sometimes, there's a permalink_url instead, and sometimes there's nothing at all
-		permalink = d.get('permalink')
-		if permalink is None:
+		if (permalink := d.get('permalink')) is None:
 			# E.g. comment dovj2v7
-			permalink = d.get('permalink_url')
-			if permalink is None:
+			if (permalink := d.get('permalink_url')) is None:
 				if 'link_id' in d and d['link_id'].startswith('t3_'): # E.g. comment doraazf
 					if 'subreddit' in d:
 						permalink = f'/r/{d["subreddit"]}/comments/{d["link_id"][3:]}/_/{d["id"]}/'

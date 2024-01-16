@@ -221,8 +221,7 @@ class Scraper:
 
 def nonempty_string(name):
 	def f(s):
-		s = s.strip()
-		if s:
+		if s := s.strip():
 			return s
 		raise ValueError('must not be an empty string')
 	f.__name__ = name

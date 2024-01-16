@@ -182,8 +182,7 @@ class TelegramChannelScraper(snscrape.base.Scraper):
 
 		for div in channelInfoDiv.find_all('div', class_ = 'tgme_channel_info_counter'):
 			value, granularity = parse_num(div.find('span', class_ = 'counter_value').text)
-			type_ = div.find('span', class_ = 'counter_type').text
-			if type_ == 'members':
+			if (type_ := div.find('span', class_ = 'counter_type').text) == 'members':
 				# Already extracted more accurately from /channel, skip
 				continue
 			elif type_ in ('photos', 'videos', 'links', 'files'):

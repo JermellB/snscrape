@@ -259,8 +259,7 @@ class FacebookUserScraper(FacebookUserAndCommunityScraper):
 			elif text.endswith(' check-ins'):
 				kwargs['checkins'] = int(text.split(' ', 1)[0].replace(',', ''))
 
-		aboutDiv = soup.find('div', class_ = '_u9q')
-		if aboutDiv:
+		if aboutDiv := soup.find('div', class_ = '_u9q'):
 			# As if the above wasn't already ugly enough, this is where it gets really bad...
 			for div in aboutDiv.find_all('div', class_ = '_2pi9'):
 				img = div.find('img', class_ = '_3-91')

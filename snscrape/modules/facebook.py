@@ -149,7 +149,7 @@ class FacebookCommonScraper(snscrape.base.Scraper):
 					logger.warning(f'Ignoring odd outlink: {href}')
 					continue
 				outlink = query['u'][0]
-				if outlink.startswith('http://') or outlink.startswith('https://') and outlink not in outlinks:
+				if outlink.startswith(('http://', 'https://')) and outlink not in outlinks:
 					outlinks.append(outlink)
 			yield FacebookPost(cleanUrl = cleanUrl, dirtyUrl = dirtyUrl, date = date, content = content, outlinks = outlinks)
 
